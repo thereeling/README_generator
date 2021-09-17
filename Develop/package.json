@@ -1,14 +1,23 @@
 {
-  "name": "static-site",
+  "name": "readme_generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "uses node.js to generator a readme file",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Nick Giuliani",
+  "license": "MIT",
   "dependencies": {
-    "inquirer": "^6.3.1"
-  }
+    "inquirer": "^6.5.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thereeling/README_generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thereeling/README_generator/issues"
+  },
+  "homepage": "https://github.com/thereeling/README_generator#readme"
 }
