@@ -1,2 +1,3 @@
-# README_generator
-Node.js app that creates a README.md file
+# Professional README Generator Starter Code
+
+[How to create a Professional README](./readme-guide.md)
