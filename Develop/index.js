@@ -1,14 +1,15 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { rejects } = require('assert');
-const { resolve } = require('path');
+// const { rejects } = require('assert');
+// const { resolve } = require('path');
+const generateMarkdown = require('./utils/generateMarkdown');
 // TODO: Create an array of questions for user input
 const promptUser = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'project-title',
+            name: 'title',
             message: 'What is the title of you project? (Required)',
             validate: titleInput => {
                 if (titleInput) {
@@ -72,7 +73,7 @@ const promptUser = () => {
         },
         {
             type: 'input',
-            name: 'collabName',
+            name: 'collab',
             message: 'Provide the name and GitHub profile for each collaborator.',
             when: ({ collabAsk }) => collabAsk
         },
@@ -84,7 +85,7 @@ const promptUser = () => {
         },
         {
             type: 'input',
-            name: 'thirdPartyName',
+            name: 'assets',
             message: 'Provide the links to the third party assets.',
             when: ({ thirdPartyAsk }) => thirdPartyAsk
         },
@@ -96,27 +97,27 @@ const promptUser = () => {
         },
         {
             type: 'input',
-            name: 'tutorialName',
+            name: 'tutorial',
             message: 'Provide the links to the tutorials',
             when: ({ tutorialAsk }) => tutorialAsk
         },
         {
             type: 'list',
             message: 'Please select a license that fits your needs. (Required)',
-            name: 'licenseList',
-            choices: ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense'],
+            name: 'license',
+            choices: ['AGPL-3.0-or-later', 'GPL-3.0-or-later', 'LGPL-3.0-or-later', 'MPL-2.0', 'Apache-2.0', 'MIT', 'BSL-1.0', 'Unlicense'],
             validate: licenseInput => {
                 if (licenseInput) {
                     return true;
                 } else {
-                    console.log('Please select a license! If unsure, choose "MIT License".');
+                    console.log('Please select a license! If unsure, choose "mit".');
                     return false;
                 }
             }
         },
         {
             type: 'input',
-            name: 'testInput',
+            name: 'test',
             message: 'Please include tests for your application. (Any code snippets should be wrapped in triple backticks before and after "```". Required)',
             validate: testInput => {
                 if (testInput) {
@@ -129,7 +130,7 @@ const promptUser = () => {
         },
         {
             type: 'input',
-            name: 'ghubName',
+            name: 'ghub',
             message: 'Please provide your GitHub username, it will be added as a link in the "Questions" section.',
             validate: ghubInput => {
                 if (ghubInput) {
@@ -154,13 +155,20 @@ const promptUser = () => {
             } 
         }
     ])
+    .then(readmeData => {
+        console.log(readmeData);
+        return readmeData;
+    });
 };
 
+
+
 // TODO: Create a function to write README file
-function writeToFile(data) {
-    fs.writeFile('./README.md', data, err => {
+const writeToFile = readmeData => {
+    return new Promise((resolve, reject) => {
+    fs.writeFile('./README.md', readmeData, err => {
         if (err) {
-            rejects(err);
+            reject(err);
             return;
         }
 
@@ -169,10 +177,21 @@ function writeToFile(data) {
             message: 'File created!'
         });
     });
+    });
 };
 
 // TODO: Create a function to initialize app
-function init() {}
 
-// Function call to initialize app
-init();
+    promptUser()
+    .then(readmeData => {
+        return generateMarkdown(readmeData);
+    })
+    .then(pageInfo=> {
+        return writeToFile(pageInfo);
+    })
+    .catch(err => {
+        return console.log(err);
+    })
+
+
+
