@@ -34,12 +34,6 @@ const promptUser = () => {
             }
         },
         {
-           type: 'confirm',
-           name: 'TOC',
-           message: 'Would you like to include a Table of contents? (if no input, one is created)',
-           default: true 
-        },
-        {
             type: 'input',
             name: 'installation',
             message: 'What are the steps required to install your project? (Required)',
@@ -102,18 +96,17 @@ const promptUser = () => {
             when: ({ tutorialAsk }) => tutorialAsk
         },
         {
+            type: 'confirm',
+            name: 'licenseAsk',
+            message: 'Would you like to include a license for your project?',
+            default: true
+        },
+        {
             type: 'list',
-            message: 'Please select a license that fits your needs. (Required)',
+            message: 'Please select a license that fits your needs.',
             name: 'license',
             choices: ['AGPL-3.0-or-later', 'GPL-3.0-or-later', 'LGPL-3.0-or-later', 'MPL-2.0', 'Apache-2.0', 'MIT', 'BSL-1.0', 'Unlicense'],
-            validate: licenseInput => {
-                if (licenseInput) {
-                    return true;
-                } else {
-                    console.log('Please select a license! If unsure, choose "mit".');
-                    return false;
-                }
-            }
+            when: ({licenseAsk}) => licenseAsk
         },
         {
             type: 'input',
@@ -156,7 +149,6 @@ const promptUser = () => {
         }
     ])
     .then(readmeData => {
-        console.log(readmeData);
         return readmeData;
     });
 };
@@ -164,9 +156,9 @@ const promptUser = () => {
 
 
 // TODO: Create a function to write README file
-const writeToFile = readmeData => {
+const writeToFile = fileContent => {
     return new Promise((resolve, reject) => {
-    fs.writeFile('./README.md', readmeData, err => {
+    fs.writeFile('./README.md', fileContent, err => {
         if (err) {
             reject(err);
             return;
@@ -174,7 +166,7 @@ const writeToFile = readmeData => {
 
         resolve({
             ok: true,
-            message: 'File created!'
+            message: console.log('File Created!')
         });
     });
     });
@@ -186,12 +178,9 @@ const writeToFile = readmeData => {
     .then(readmeData => {
         return generateMarkdown(readmeData);
     })
-    .then(pageInfo=> {
-        return writeToFile(pageInfo);
+    .then(readmeData =>{
+        return writeToFile(readmeData);
     })
     .catch(err => {
         return console.log(err);
     })
-
-
-
