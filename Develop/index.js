@@ -1,10 +1,9 @@
-// TODO: Include packages needed for this application
+// Node modules and packages
 const inquirer = require('inquirer');
 const fs = require('fs');
-// const { rejects } = require('assert');
-// const { resolve } = require('path');
+// Grabbing module from generateMarkdown.js
 const generateMarkdown = require('./utils/generateMarkdown');
-// TODO: Create an array of questions for user input
+// Array of questions prompted for user
 const promptUser = () => {
     return inquirer.prompt([
         {
@@ -155,7 +154,7 @@ const promptUser = () => {
 
 
 
-// TODO: Create a function to write README file
+// Function that creates the README file using the data from the user inputs
 const writeToFile = fileContent => {
     return new Promise((resolve, reject) => {
     fs.writeFile('./README.md', fileContent, err => {
@@ -172,8 +171,8 @@ const writeToFile = fileContent => {
     });
 };
 
-// TODO: Create a function to initialize app
 
+// Function that chains promises and callbacks, generating the README first, then creating the README file, and finally, a catch in case there are errors
     promptUser()
     .then(readmeData => {
         return generateMarkdown(readmeData);

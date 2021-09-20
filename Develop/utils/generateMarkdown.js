@@ -1,12 +1,4 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-
-
-
-
-
-// TODO: Create a function to generate markdown for README
-
+// Creating a module that exports README file content after a set of functions based on the user input.
 
 module.exports = readmeData => {
 
@@ -89,8 +81,7 @@ ${renderTutorial(tutorial)}
     `;
   };
   
-  // TODO: Create a function that returns the license link
-  // If there is no license, return an empty string
+  
   function renderLicenseLink() {
     if (!license){
     return '';
@@ -101,8 +92,7 @@ https://spdx.org/licenses/${license}.html
   `;
   };
   
-  // TODO: Create a function that returns the license section of README
-  // If there is no license, return an empty string
+
   function renderLicenseSection() {
     if (!license){
       return '';
