@@ -2,7 +2,7 @@
 
 ## Description 
 
-This application is a README.md generator thats uses node.js and the inquirer NPM package to prompt the user for input, and then take that data and create a professional README.  Creating a well-written/organized README is crucial in software development, since it helps with communication and collaboration.  Using this application will help streamline and speed up the README creation process, giving the develop more time to code!  To use this application, please watch this quickstart guide: (Link to google drive containing video). 
+This application is a README.md generator thats uses node.js and the inquirer NPM package to prompt the user for input, and then take that data and create a professional README.  Creating a well-written/organized README is crucial in software development, since it helps with communication and collaboration.  Using this application will help streamline and speed up the README creation process, giving the develop more time to code!  To use this application, please watch this quickstart guide: https://drive.google.com/file/d/14AK5-HoAd2sm_LD3tH9z0fdyo1Cnk2t6/view?usp=sharing . 
 
 ![Screenshot_Terminal](./Develop/assets/Terminal_SS.png)
 
