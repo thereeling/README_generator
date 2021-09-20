@@ -40,7 +40,7 @@ const promptUser = () => {
                 if (installInput) {
                     return true;
                 } else {
-                    console.log('Please enter and installation guide!');
+                    console.log('Please enter an installation guide!');
                     return false;
                 }
             }

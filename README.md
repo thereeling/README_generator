@@ -22,7 +22,9 @@ To install this application, you must have node.js installed on your computer (h
 
 1. At this projects GitHub Repo, click on the green code button and download the .ZIP file.
 
-2. Extract the contents of the .ZIP file on you computer.
+2. Extract the contents of the .ZIP file on you computer.  
+
+3. Download the required dependencies for this project by opening the root dir with terminal, using ``` cd Develop ``` to move to the Develop dir, and then type in the command ``` npm install ```, which will download all necessary dependencies.
 
 
 ## Usage 
